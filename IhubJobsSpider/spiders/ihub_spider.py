@@ -1,6 +1,11 @@
 import scrapy
 from IhubJobsSpider.items import IhubjobsspiderItem
 
+"""
+A class that scrapes information from "http://ihub.co.ke/jobs"
+"""
+
+
 class IhubSpider(scrapy.Spider):
     name = "ihub"
     allowed_domains = ["ihub.co.ke"]
@@ -12,6 +17,10 @@ class IhubSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
+        """
+        :param response:
+        :return: responsible for parsing data and returning scrapped data
+        """
         for i in response.xpath('//div'):
             item = IhubjobsspiderItem()
             item['job_title'] = i.xpath('h3/a/text()').extract()
